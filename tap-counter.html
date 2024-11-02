@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container);
+
+      function Buttons({ innerText, onClick, disabled }) {
+        return (
+          <button
+            className="bg-blue-500 hover:bg-blue-700 px-3 py-2 m-5 rounded-md text-white disabled:cursor-not-allowed disabled:bg-slate-500 "
+            onClick={onClick}
+            disabled={disabled}
+          >
+            {innerText}
+          </button>
+        );
+      }
+
+      function Values({ counterValue }) {
+        return <span className="text-3xl font-semibold">{counterValue}</span>;
+      }
+
+      function Main() {
+        const [counters, setCounters] = React.useState(0);
+
+        function increment() {
+          setCounters(counters + 1);
+          if (counters >= 9) setCounters("Done!");
+        }
+
+        // kalo function nya cuma 1 statement mending tulisin inline waktu manggilnya aja
+        // function decrement() {
+        //   setCounters(counters - 1);
+        // }
+
+        function reset() {
+          setCounters(0);
+        }
+
+        return (
+          <>
+            <Buttons
+              innerText="-"
+              onClick={() => setCounters(counters - 1)}
+              disabled={counters === "Done!"}
+            />
+            <Values counterValue={counters} />
+            <Buttons
+              innerText="+"
+              onClick={increment}
+              disabled={counters === "Done!"}
+            />
+            <Buttons
+              innerText="Reset"
+              onClick={reset}
+              disabled={counters !== "Done!"}
+            />
+          </>
+        );
+      }
+
+      root.render(<Main />);
+    </script>
+  </body>
+</html>

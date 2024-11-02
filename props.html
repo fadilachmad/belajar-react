@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- 3 aturan dalam menulis jsx: 
+     - selalu kembalikan 1 elemen => jika didalam render terdapat banyak elemen html, pastikan bungkus semua elemen tersebut agar menjadi 1 elemen 
+     - selalu tutup semua tag => pastikan untuk menutup semua tag dengan tag pasangannya atau self closing 
+     - selalu gunakan camelCase untuk atribut => penulisan atribut di setiap tag harus menggunakan camelCase -->
+
+    <script type="text/babel">
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container);
+
+      function Header({ name }) {
+        return (
+          <>
+            <h1 className="heading text-xl sm:text-3xl font-bold  uppercase text-center my-5">
+              Belajar react bareng WPU🚀
+            </h1>
+            <img src={name ? name : "react1.png"} alt="" className="mx-auto" />
+            <p
+              onClick={(e) => {
+                alert("ok!");
+              }}
+              className="text-sm sm:text-lg font-bold  uppercase text-center underline text-sky-500 cursor-pointer my-5"
+            >
+              Yuk belajar React
+            </p>
+          </>
+        );
+      }
+
+      function HomePage() {
+        return (
+          <>
+            <Header />
+            <Header name="react2.png" />
+          </>
+        );
+      }
+      root.render(<HomePage />);
+    </script>
+  </body>
+</html>
